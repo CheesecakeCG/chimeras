@@ -16,8 +16,10 @@ _global_script_class_icons={
 [application]
 
 config/name="CHIMERAS"
+run/main_scene="res://test/test.tscn"
 config/icon="res://icon.png"
 
 [rendering]
 
+threads/thread_model=2
 environment/default_environment="res://default_env.tres"

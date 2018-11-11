@@ -19,6 +19,10 @@ config/name="CHIMERAS"
 run/main_scene="res://test/test.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/fullscreen=true
+
 [input]
 
 player_jump={

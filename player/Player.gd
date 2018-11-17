@@ -5,7 +5,7 @@ extends KinematicBody
 # var b = "text"
 export var jump_force = 40
 export var walk_force = 800
-export var weight = 2
+export var weight = 3
 export var term_vel = 20
 var vel = Vector3()
 var dir = Vector3()
@@ -24,7 +24,7 @@ func _physics_process(delta):
 
 	# Gravity & Movement
 	if not is_on_floor():
-		vel.y -= 20 * delta
+		vel.y -= (25 + weight) * delta # Gravity feels better set super high
 	else:
 		if Input.is_key_pressed(KEY_W):
 			vel.z += walk_force * delta

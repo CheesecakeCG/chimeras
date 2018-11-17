@@ -52,9 +52,7 @@ data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1
 [node name="Spatial" type="Spatial"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-jump_force = 40
-walk_force = 800
-term_vel = 20
+weight = 3
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 31.2591, 0, 0, 0, 31.2591, 0, 0, 0, 31.2591, 0, 0, 0 )
@@ -134,7 +132,6 @@ constant_linear_velocity = Vector3( 0, 0, 0 )
 constant_angular_velocity = Vector3( 0, 0, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance6/StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 5 )
 disabled = false
 

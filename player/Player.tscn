@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 
@@ -119,6 +119,131 @@ shadow_size = 0
 anti_aliasing = true
 anti_aliasing_size = 1
 
+[sub_resource type="AnimationNodeAnimation" id=10]
+
+filter_enabled = false
+filters = [  ]
+animation = "PistolFire"
+
+[sub_resource type="AnimationNodeStateMachine" id=11]
+
+states/PistolFire/node = SubResource( 10 )
+states/PistolFire/position = Vector2( 166, 58 )
+transitions = [  ]
+start_node = "PistolFire"
+end_node = ""
+graph_offset = Vector2( 0, 0 )
+
+[sub_resource type="AnimationNodeStateMachine" id=12]
+
+transitions = [  ]
+start_node = ""
+end_node = ""
+graph_offset = Vector2( 0, 0 )
+
+[sub_resource type="AnimationNodeStateMachine" id=13]
+
+transitions = [  ]
+start_node = ""
+end_node = ""
+graph_offset = Vector2( 0, 0 )
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+
+switch_mode = 0
+auto_advance = false
+advance_condition = ""
+xfade_time = 0.0
+priority = 1
+disabled = false
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+
+switch_mode = 0
+auto_advance = false
+advance_condition = ""
+xfade_time = 0.0
+priority = 1
+disabled = false
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+
+switch_mode = 2
+auto_advance = true
+advance_condition = ""
+xfade_time = 0.0
+priority = 1
+disabled = false
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+
+switch_mode = 2
+auto_advance = true
+advance_condition = ""
+xfade_time = 0.0
+priority = 1
+disabled = false
+
+[sub_resource type="AnimationNodeStateMachine" id=7]
+
+states/Firing/node = SubResource( 11 )
+states/Firing/position = Vector2( 322, 64 )
+states/Idle/node = SubResource( 12 )
+states/Idle/position = Vector2( 127, 64 )
+states/Reloading/node = SubResource( 13 )
+states/Reloading/position = Vector2( 127, 173 )
+transitions = [ "Idle", "Firing", SubResource( 14 ), "Idle", "Reloading", SubResource( 15 ), "Firing", "Idle", SubResource( 16 ), "Reloading", "Idle", SubResource( 17 ) ]
+start_node = "Idle"
+end_node = ""
+graph_offset = Vector2( 0, 0 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=8]
+
+resource_local_to_scene = true
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=18]
+
+resource_local_to_scene = true
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=19]
+
+resource_local_to_scene = true
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=20]
+
+resource_local_to_scene = true
+
+[sub_resource type="Animation" id=9]
+
+resource_name = "PistolFire"
+length = 1.0
+loop = false
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Camera/ViewModel/Pistol:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.6 ),
+"transitions": PoolRealArray( 187.402, 0.148651, 1 ),
+"update": 0,
+"values": [ Vector3( 0.482581, -0.378623, -0.183884 ), Vector3( 0.482582, -0.378624, -0.0224738 ), Vector3( 0.482581, -0.378623, -0.183884 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/Camera/ViewModel/Pistol:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.6 ),
+"transitions": PoolRealArray( 111.43, 0.217638, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1.85409e-11, 0 ), Vector3( 23.2979, 1.65745e-06, 8.03948e-06 ), Vector3( 0, 1.85409e-11, 0 ) ]
+}
+
 [node name="Player" type="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 input_ray_pickable = false
@@ -167,15 +292,15 @@ collide_with_bodies = true
 
 [node name="ViewModel" type="Spatial" parent="Body/Camera"]
 
-[node name="CSGCombiner" type="CSGCombiner" parent="Body/Camera/ViewModel"]
-transform = Transform( 0.658722, 0, 1.27898e-13, 0, 0.658722, 0, -1.27898e-13, 0, 0.658722, 0.482581, -0.212996, 0.318383 )
+[node name="Pistol" type="CSGCombiner" parent="Body/Camera/ViewModel"]
+transform = Transform( 0.658722, 0, 2.13163e-13, 0, 0.658722, 0, -2.13163e-13, 0, 0.658722, 0.482581, -0.378623, -0.183884 )
 layers = 1
 operation = 0
 use_collision = false
 snap = 0.001
 
-[node name="CSGMesh" type="CSGMesh" parent="Body/Camera/ViewModel/CSGCombiner"]
-transform = Transform( 0.09, 0, -1.66179e-07, 0, 0.12, 0, -1.66179e-07, 0, 0.6, 6.51682e-07, 0, -2 )
+[node name="CSGMesh" type="CSGMesh" parent="Body/Camera/ViewModel/Pistol"]
+transform = Transform( 0.09, 0, -1.66179e-07, 0, 0.12, 0, -1.66179e-07, 0, 0.6, 2.38419e-07, 0.407259, -0.710914 )
 layers = 1
 operation = 0
 use_collision = false
@@ -183,8 +308,8 @@ snap = 0.001
 invert_faces = false
 mesh = SubResource( 2 )
 
-[node name="CSGMesh7" type="CSGMesh" parent="Body/Camera/ViewModel/CSGCombiner"]
-transform = Transform( -1.61257e-07, 0, 0.6, 0, 0.132, 0, -0.11718, 0, 1.23175e-07, 7.15256e-07, 0.194017, -2.33051 )
+[node name="CSGMesh7" type="CSGMesh" parent="Body/Camera/ViewModel/Pistol"]
+transform = Transform( -1.61257e-07, 0, 0.6, 0, 0.132, 0, -0.11718, 0, 1.23175e-07, 5.96046e-07, 0.601276, -1.04142 )
 layers = 1
 operation = 2
 use_collision = false
@@ -192,8 +317,8 @@ snap = 0.001
 invert_faces = false
 mesh = SubResource( 2 )
 
-[node name="CSGMesh2" type="CSGMesh" parent="Body/Camera/ViewModel/CSGCombiner"]
-transform = Transform( 0.09, -3.70715e-08, -3.28415e-08, 1.05656e-07, 0.0217506, -0.324256, -3.28415e-08, 0.113772, 0.19079, 6.85453e-07, -0.233395, -1.88234 )
+[node name="CSGMesh2" type="CSGMesh" parent="Body/Camera/ViewModel/Pistol"]
+transform = Transform( 0.09, -3.70715e-08, -3.28415e-08, 1.05656e-07, 0.0217506, -0.324256, -3.28415e-08, 0.113772, 0.19079, 4.17233e-07, 0.173864, -0.593257 )
 layers = 1
 operation = 0
 use_collision = false
@@ -201,8 +326,8 @@ snap = 0.001
 invert_faces = false
 mesh = SubResource( 2 )
 
-[node name="CSGMesh3" type="CSGMesh" parent="Body/Camera/ViewModel/CSGCombiner"]
-transform = Transform( 0.0597207, -3.6854e-08, 4.1159e-09, 1.21625e-07, -0.0249898, -0.373264, 4.11593e-09, 0.113104, 0.0470893, 9.83477e-07, -0.185415, -1.54464 )
+[node name="CSGMesh3" type="CSGMesh" parent="Body/Camera/ViewModel/Pistol"]
+transform = Transform( 0.0597207, -3.6854e-08, 4.1159e-09, 1.21625e-07, -0.0249898, -0.373264, 4.11593e-09, 0.113104, 0.0470893, 7.7486e-07, 0.221844, -0.255556 )
 layers = 1
 operation = 0
 use_collision = false
@@ -210,8 +335,8 @@ snap = 0.001
 invert_faces = false
 mesh = SubResource( 2 )
 
-[node name="CSGMesh4" type="CSGMesh" parent="Body/Camera/ViewModel/CSGCombiner"]
-transform = Transform( 0.0234649, 1.43198e-08, 1.30104e-07, -5.66263e-09, -0.107172, 0.0173782, 1.30104e-07, -0.0439471, -0.375821, 1.3113e-06, 0.0716767, -2.23753 )
+[node name="CSGMesh4" type="CSGMesh" parent="Body/Camera/ViewModel/Pistol"]
+transform = Transform( 0.0234649, 1.43198e-08, 1.30104e-07, -5.66263e-09, -0.107172, 0.0173782, 1.30104e-07, -0.0439471, -0.375821, 1.2517e-06, 0.478936, -0.948442 )
 layers = 1
 operation = 0
 use_collision = false
@@ -219,8 +344,8 @@ snap = 0.001
 invert_faces = false
 mesh = SubResource( 2 )
 
-[node name="CSGMesh5" type="CSGMesh" parent="Body/Camera/ViewModel/CSGCombiner"]
-transform = Transform( 0.0757573, 3.0856e-08, 2.46848e-08, -2.46848e-08, -3.31145e-09, 0.0757573, 2.46848e-08, -0.0946966, -4.13931e-09, 1.01328e-06, 0, -2.65866 )
+[node name="CSGMesh5" type="CSGMesh" parent="Body/Camera/ViewModel/Pistol"]
+transform = Transform( 0.0757573, 3.0856e-08, 2.46848e-08, -2.46848e-08, -3.31145e-09, 0.0757573, 2.46848e-08, -0.0946966, -4.13931e-09, 6.55651e-07, 0.407259, -1.36957 )
 layers = 1
 operation = 0
 use_collision = false
@@ -228,8 +353,8 @@ snap = 0.001
 invert_faces = false
 mesh = SubResource( 3 )
 
-[node name="CSGMesh6" type="CSGMesh" parent="Body/Camera/ViewModel/CSGCombiner"]
-transform = Transform( 0.0523038, 5.5003e-08, 1.70427e-08, -1.70427e-08, -2.28627e-09, 0.0523038, 1.70427e-08, -0.168803, -7.37861e-09, 1.01328e-06, 0, -2.65866 )
+[node name="CSGMesh6" type="CSGMesh" parent="Body/Camera/ViewModel/Pistol"]
+transform = Transform( 0.0523038, 5.5003e-08, 1.70427e-08, -1.70427e-08, -2.28627e-09, 0.0523038, 1.70427e-08, -0.168803, -7.37861e-09, 6.55651e-07, 0.407259, -1.36957 )
 layers = 1
 operation = 2
 use_collision = false
@@ -237,8 +362,8 @@ snap = 0.001
 invert_faces = false
 mesh = SubResource( 3 )
 
-[node name="CSGMesh8" type="CSGMesh" parent="Body/Camera/ViewModel/CSGCombiner"]
-transform = Transform( -1.31901e-07, 1.73248e-08, 0.475134, -0.0472001, 0.0899967, -2.91343e-08, -0.0798925, -0.0531696, 1.05504e-07, 6.55651e-07, -0.208002, -2.0593 )
+[node name="CSGMesh8" type="CSGMesh" parent="Body/Camera/ViewModel/Pistol"]
+transform = Transform( -1.31901e-07, 1.73248e-08, 0.475134, -0.0472001, 0.0899967, -2.91343e-08, -0.0798925, -0.0531696, 1.05504e-07, 3.57628e-07, 0.199257, -0.770218 )
 layers = 1
 operation = 2
 use_collision = false
@@ -312,4 +437,24 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 custom_styles/panel = SubResource( 5 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 7 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+process_mode = 1
+root_motion_track = NodePath("")
+parameters/playback = SubResource( 8 )
+parameters/Firing/playback = SubResource( 18 )
+parameters/Idle/playback = SubResource( 19 )
+parameters/Reloading/playback = SubResource( 20 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/PistolFire = SubResource( 9 )
+blend_times = [  ]
 

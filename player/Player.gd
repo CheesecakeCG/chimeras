@@ -63,15 +63,17 @@ func _physics_process(delta):
 	
 
 	
-func _process(delta):
-	cam.rotation_degrees.x = dir.x
-	body.rotation_degrees.y = dir.y
+#func _process(delta):
+#	cam.rotation_degrees.x = dir.x
+#	body.rotation_degrees.y = dir.y
 	
 func _input(event):
-	
-	
+	if Input.is_action_just_pressed("player_shoot"):
+		$AnimationPlayer.play("PistolFire")
 	if event is InputEventMouseMotion:
 		dir.y += -event.relative.x * mouse_sensitivity * .1
 		dir.x = clamp(dir.x + -event.relative.y * mouse_sensitivity * .1, -70, 85)
+		cam.rotation_degrees.x = dir.x
+		body.rotation_degrees.y = dir.y
 
 	
